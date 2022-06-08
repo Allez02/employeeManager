@@ -1,10 +1,14 @@
 package com.employeemanager.employeeManager.models;
 
+import lombok.Data;
+import lombok.Getter;
+import lombok.Setter;
 import org.springframework.security.core.GrantedAuthority;
 
 import javax.persistence.*;
 
 @Entity
+@Data
 public class PositionModels implements GrantedAuthority {
 
     @Id
@@ -18,42 +22,6 @@ public class PositionModels implements GrantedAuthority {
     private int zp;
 
     private float premium;
-
-    public float getPremium() {return premium;}
-
-    public void setPremium(float premium) {this.premium = premium;}
-
-    public void setId(Long id) {
-        setId(id);
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public void setDescription(String description) {
-        this.description = description;
-    }
-
-    public void setZp(int salary) {
-        this.zp = salary;
-    }
-
-    public Long getId() {
-        return id;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public String getDescription() {
-        return description;
-    }
-
-    public int getZp() {
-        return this.zp;
-    }
 
     public PositionModels() {
 

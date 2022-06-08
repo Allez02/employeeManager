@@ -1,5 +1,8 @@
 package com.employeemanager.employeeManager.models;
 
+import lombok.Data;
+import lombok.Getter;
+import lombok.Setter;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
@@ -8,18 +11,13 @@ import java.util.Collection;
 import java.util.Collections;
 
 @Entity
+@Data
 public class UsersModels implements UserDetails {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    public Long getId() {
-        return id;
-    }
-    public void setId(Long id) {
-        setId(id);
-    }
 
     private String username;
 
@@ -37,19 +35,7 @@ public class UsersModels implements UserDetails {
     @JoinColumn(name = "position_id")
     public PositionModels position;
 
-    public String getPhone() {
-        return phone;
-    }
 
-
-
-    public PositionModels getPosition() {
-        return position;
-    }
-
-    public void setPhone(String phone) {
-        this.phone = phone;
-    }
 
     @Override
     public String getUsername() {
@@ -71,9 +57,7 @@ public class UsersModels implements UserDetails {
         return true;
     }
 
-    public void setPosition(PositionModels position) {
-        this.position = position;
-    }
+
 
     public UsersModels() {
 
@@ -105,9 +89,6 @@ public class UsersModels implements UserDetails {
         return true;
     }
 
-    public void setUsername(String username) {
-        this.username = username;
-    }
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
@@ -117,34 +98,6 @@ public class UsersModels implements UserDetails {
     @Override
     public String getPassword() {
         return password;
-    }
-
-    public void setPassword(String password) {
-        this.password = password;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public String getSurname() {
-        return surname;
-    }
-
-    public void setSurname(String surname) {
-        this.surname = surname;
-    }
-
-    public String getPatronymic() {
-        return patronymic;
-    }
-
-    public void setPatronymic(String patronymic) {
-        this.patronymic = patronymic;
     }
 
     public String GetFOI() {

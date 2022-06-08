@@ -23,12 +23,8 @@ public class AccountingController {
 
     @GetMapping("/accounting")
     public String accounting(Model model, Authentication auth) {
-        Optional<UsersModels> us= userRepo.getByUsername(auth.getName());
-        List<UsersModels> user = new ArrayList<>();
-        us.ifPresent(user::add);
-        List<PositionModels> position = new ArrayList<PositionModels>();
-        position.add(user.get(0).getPosition());
-        model.addAttribute("position", position);
+        UsersModels usersModels = (UsersModels) auth.getPrincipal();
+        model.addAttribute("position", usersModels.getPosition());
         return "accounting";
     }
 }

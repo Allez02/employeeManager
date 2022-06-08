@@ -1,14 +1,17 @@
 package com.employeemanager.employeeManager.models;
 
 import lombok.Data;
+import lombok.Getter;
+import lombok.Setter;
 
 import javax.persistence.*;
 import java.io.Serializable;
 
-@Data
+
 @Entity
 @Table(name = "ads")
-public class AdsModels implements Serializable {
+@Data
+public class AdsModels {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -23,9 +26,4 @@ public class AdsModels implements Serializable {
         this.name = name;
         this.text = text;
     }
-
-
-
-
-
 }

@@ -2,11 +2,14 @@ package com.employeemanager.employeeManager.models;
 
 
 import lombok.Data;
+import lombok.Getter;
+import lombok.Setter;
 
 import javax.persistence.*;
 import java.util.Date;
 @Entity
 @Table(name = "message_model")
+@Data
 public class MessageModel {
 
     @Id
@@ -17,40 +20,10 @@ public class MessageModel {
 
     private Date date = new Date();
 
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public String getText() {
-        return text;
-    }
-
-    public void setText(String text) {
-        this.text = text;
-    }
-
-    public Date getDate() {
-        return date;
-    }
-
-    public void setDate(Date date) {
-        this.date = date;
-    }
-
-    public void setAutor(UsersModels autor) {
-        this.autor = autor;
-    }
 
     @ManyToOne
     private UsersModels autor;
 
-    public UsersModels getAutor() {
-        return autor;
-    }
 
     public MessageModel () {
 

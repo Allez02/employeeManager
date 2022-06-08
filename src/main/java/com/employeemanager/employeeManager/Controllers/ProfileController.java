@@ -25,22 +25,18 @@ public class ProfileController {
 
     @GetMapping("/profile")
     public String profile(Model model, Authentication auth) {
-        Optional<UsersModels> us= userRepo.getByUsername(auth.getName());
-        List<UsersModels> user = new ArrayList<>();
-        us.ifPresent(user::add);
-        model.addAttribute("user", user);
+        UsersModels usersModels = (UsersModels)auth.getPrincipal();
+        model.addAttribute("user", usersModels);
         return "profile";
     }
 
     @GetMapping("/profile/edit/{id}")
     public String profileEdit (@PathVariable(value = "id") long id, Model model, Authentication auth) {
-        Optional<UsersModels> us= userRepo.getByUsername(auth.getName());
-        List<UsersModels> user = new ArrayList<>();
-        us.ifPresent(user::add);
-        if (user.get(0).getId() != id) {
+        UsersModels usersModels = (UsersModels)auth.getPrincipal();
+        if (usersModels.getId() != id) {
             return "redirect:/profile";
         } else {
-            model.addAttribute("user", user);
+            model.addAttribute("user", usersModels);
             return "profile-edit";
         }
     }

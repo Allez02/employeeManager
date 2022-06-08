@@ -20,7 +20,6 @@ public class MainController {
 
     @GetMapping("/")
     public String home(Model model) {
-
         List<AdsModels> adsModels= (List<AdsModels>) adsService.getAll();
         model.addAttribute("ads", adsModels.get(0));
         return "home";
