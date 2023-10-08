@@ -1,23 +1,23 @@
 package com.employeemanager.employeeManager.service;
 
-import com.employeemanager.employeeManager.repo.UserRepo;
+import com.employeemanager.employeeManager.repository.UserRepository;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
 @Service
-public class UserService implements UserDetailsService {
+public class UserServiceImpl implements UserDetailsService {
 
-    private UserRepo userRepo;
+    private final UserRepository userRepository;
 
-    public UserService(UserRepo userRepo) {
-        this.userRepo = userRepo;
+    public UserServiceImpl(UserRepository userRepository) {
+        this.userRepository = userRepository;
     }
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        return userRepo.getByUsername(username).orElseThrow(() -> new UsernameNotFoundException(username));
+        return userRepository.getByUsername(username).orElseThrow(() -> new UsernameNotFoundException(username));
     }
 
 }

@@ -11,7 +11,6 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 @Configuration
 @EnableWebSecurity
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
-
     @Bean
     public PasswordEncoder encoder() {
         return new PasswordEncoder() {
@@ -28,16 +27,22 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     }
 
     @Override
-    protected void configure(HttpSecurity http) throws Exception {
-        http
-                .csrf().disable()
+    protected void configure(HttpSecurity httpSecurity) throws Exception {
+        httpSecurity
+                .csrf()
+                .disable()
                 .authorizeRequests()
-                .antMatchers("/admin/**").hasAuthority("BIG_BOSS")
-                .antMatchers("/ads/add", "/ads/mode/{id}", "/ads/edit/{id}", "/ads/delete/{id}").hasAnyAuthority("BIG_BOSS","BOSS")
-                .anyRequest().authenticated()
+                .antMatchers("/registration").not().fullyAuthenticated()
+                .antMatchers("/admin/**").hasRole("ADMIN")
+                .antMatchers("/recipe/**").authenticated()
                 .and()
-                .formLogin().permitAll();
-
+                .formLogin()
+                .defaultSuccessUrl("/recipe")
+                .permitAll()
+                .and()
+                .logout()
+                .permitAll()
+                .logoutSuccessUrl("/login");
     }
 
 }
