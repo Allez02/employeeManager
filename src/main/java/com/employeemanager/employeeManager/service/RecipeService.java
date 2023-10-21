@@ -15,4 +15,6 @@ public interface RecipeService {
     void update(Long id, String name, String product, String cookingMethod, String linkToPicture, User author);
 
     void delete(Long id, User user);
+
+    List<Recipe> getRecipeByUser(User user);
 }

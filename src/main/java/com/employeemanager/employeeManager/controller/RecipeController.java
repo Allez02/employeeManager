@@ -40,5 +40,4 @@ public class RecipeController {
     public void deleteRecipe(@PathVariable(value = "id") Long id, Authentication auth){
         this.recipeService.delete(id, (User) auth.getPrincipal());
     }
-
 }

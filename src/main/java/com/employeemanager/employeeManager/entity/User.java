@@ -31,6 +31,10 @@ public class User implements UserDetails {
     @JoinColumn(name = "role_id")
     private Role role;
 
+    private Boolean isNonLocked;
+
+    private Boolean isApproved;
+
     public User() {
 
     }
@@ -42,6 +46,8 @@ public class User implements UserDetails {
         this.surname = surname;
         this.information = information;
         this.role = role;
+        this.isNonLocked = true;
+        this.isApproved = false;
     }
 
     @Override
@@ -51,12 +57,20 @@ public class User implements UserDetails {
 
     @Override
     public boolean isAccountNonExpired() {
-        return true;
+        return this.isApproved;
+    }
+
+    public void setIsApproved(Boolean isApproved) {
+        this.isApproved = isApproved;
+    }
+
+    public void setIsNonLocked(Boolean isNonLocked) {
+        this.isNonLocked = isNonLocked;
     }
 
     @Override
     public boolean isAccountNonLocked() {
-        return true;
+        return this.isNonLocked;
     }
 
     @Override

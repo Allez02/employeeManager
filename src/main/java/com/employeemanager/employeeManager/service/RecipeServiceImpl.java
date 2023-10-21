@@ -18,7 +18,7 @@ public class RecipeServiceImpl implements RecipeService{
 
     @Override
     public List<Recipe> getAllRecipe() {
-        return recipeRepository.findAll();
+        return (List<Recipe>) recipeRepository.findAll();
     }
 
     @Override
@@ -34,7 +34,7 @@ public class RecipeServiceImpl implements RecipeService{
     @Override
     public void update(Long id, String name, String product, String cookingMethod, String linkToPicture, User author) {
         Recipe recipe = this.recipeRepository.findById(id).orElseThrow(() -> new RuntimeException("Recipe is not found"));
-        if(author.getRole().getName().equals("ADMIN") || recipe.getAuthor() == author) {
+        if(recipe.getAuthor() == author) {
             recipe.setName(name);
             recipe.setCookingMethod(cookingMethod);
             recipe.setProduct(product);
@@ -51,4 +51,11 @@ public class RecipeServiceImpl implements RecipeService{
             this.recipeRepository.deleteById(id);
         }
     }
+
+    @Override
+    public List<Recipe> getRecipeByUser(User user) {
+        return this.recipeRepository.findAllByAuthor(user);
+    }
+
+
 }
