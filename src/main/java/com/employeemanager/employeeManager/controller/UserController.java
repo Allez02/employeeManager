@@ -22,4 +22,9 @@ public class UserController {
         this.userService.createUser(username, password, name, surname, information, false);
     }
 
+    @GetMapping("/loginTrue")
+    public Boolean loginTrue() {
+        return true;
+    }
+
 }
