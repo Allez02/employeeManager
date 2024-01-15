@@ -1,8 +1,6 @@
 package com.employeemanager.employeeManager.service;
 
 import com.employeemanager.employeeManager.entity.User;
-import org.springframework.lang.Nullable;
-
 import java.util.List;
 
 public interface UserService {
@@ -15,5 +13,5 @@ public interface UserService {
 
     void lockedUser(Long userId, Boolean isLocked);
 
-    void approvedUser(Long userId);
+    void approvedUser(Long userId, Boolean approved);
 }

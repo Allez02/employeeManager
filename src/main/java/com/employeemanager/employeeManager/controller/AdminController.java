@@ -33,9 +33,9 @@ public class AdminController {
     public List<User> getNewUsers() {
         return this.userService.getAllUsersByApproved(false);
     }
-    @PutMapping("/admin/newNonApprovedUsers/approved/{id}")
-    public void approvedUser(@PathVariable(value = "id") Long id) {
-
+    @PutMapping("/admin/newNonApprovedUsers/{id}/approved/{approved}")
+    public void approvedUser(@PathVariable(value = "id") Long id, @PathVariable(value = "approved") Boolean approved) {
+        this.userService.approvedUser(id, approved);
     }
 
     @GetMapping("/admin/allApprovedUsers")
