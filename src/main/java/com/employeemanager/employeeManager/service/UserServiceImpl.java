@@ -58,7 +58,7 @@ public class UserServiceImpl implements UserDetailsService, UserService {
     @Override
     public void approvedUser(Long userId, Boolean approved) {
         var user = this.userRepository.findById(userId).orElseThrow();
-        user.setIsApproved(approved);
+        user.setIsApproved(true);
         if(!approved) {
             user.setIsNonLocked(false);
         }
