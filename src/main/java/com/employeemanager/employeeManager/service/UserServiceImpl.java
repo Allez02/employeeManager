@@ -6,6 +6,7 @@ import com.employeemanager.employeeManager.repository.UserRepository;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -13,10 +14,13 @@ import java.util.List;
 @Service
 public class UserServiceImpl implements UserDetailsService, UserService {
 
+    private final PasswordEncoder encoder;
+
     private final UserRepository userRepository;
     private final RoleRepository roleRepository;
 
-    public UserServiceImpl(UserRepository userRepository, RoleRepository roleRepository) {
+    public UserServiceImpl(PasswordEncoder encoder, UserRepository userRepository, RoleRepository roleRepository) {
+        this.encoder = encoder;
         this.userRepository = userRepository;
         this.roleRepository = roleRepository;
     }
@@ -31,7 +35,7 @@ public class UserServiceImpl implements UserDetailsService, UserService {
         if(userRepository.existsUserByUsername(username)) {
             throw new RuntimeException("Пользователь с таким username уже существует");
         }
-        var user = new User(username, password, name, surname, information, createAdmin ? roleRepository.getById(1L) : roleRepository.getById(2L));
+        var user = new User(username, encoder.encode(password), name, surname, information, createAdmin ? roleRepository.getById(1L) : roleRepository.getById(2L));
         this.userRepository.save(user);
     }
 
